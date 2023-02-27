@@ -1,30 +1,35 @@
-# I2C Communication Protocol
+# Finite Impulse Reponse (FIR) Filter
 
-> SystemVerilog I2C communication protocol  
+> SystemVerilog FIR filter  
 
-Implementention in SystemVerilog of __I2C Communication protocol__.  
+SystemVerilog implementation of __generalized FIR filter module__
+
 
 ## Get Started
 
 The source files  are located at the repository root:
 
-- [I2C Controller](./master_I2C.sv)
-- [I2C Target](./target_I2C.sv)
-- [Multi-Masters Multi-Targets System](./I2C.sv)
-- [I2C TB](./I2C_TB.sv)
+- [FIR filter Matlab script](./FIR_Design.m)
+- [FIR filter](./FIR.sv)
+- [FIR filter coefficients](./filter_coefficients.txt)
+- [Input signal](./input_signal.txt)
+- [FIR filter TB](./FIR_TB.sv)
 
 ##
-This repository containts a SystemVerilog implementation of I2C controller and target modules designed in accordance with the [I2C-bus specification manual by NXP (Rev. 7.0, October 2021)](https://www.pololu.com/file/0J435/UM10204.pdf)
+This repository containts a SystemVerilog implementation of a parametrized finite impulse reponse (FIR) filter as well as a Matlab script for coefficient selection and input data pre-processing. Theoretical background can be found in [XXX](https://www.pololu.com/file/0J435/UM10204.pdf).
 
-The two modules are built as FSMs which emcapsulte the periodic structure of the I2C protocol. It is advised to draw a simple flowchart when reading the sourcecode for better undrstanding. Shown below is a simplified version of the controller's flowchart for better understanding:
-![Controller_flowchart](./docs/flowchart.jpg) 
+##Matlab script
+The filter coefficients are obtained from the attached Matlab script which also converts the floating point representation of the built-in 'fir1' function into a user-defined fixed-point representation. In addition, the input signal to be filtered undergoes similar convertion to fixed-point representation.These are exported to two text files ('filter_coefficients' and 'input_signal') which are then imported to the TB.
+The coefficeints in this example are derived to satisfy:
+	1.Passband frequency of 10kHz
+	2.Stopband frequency of 15kHz
+	3.Stopband attenuation in dB
+	4.Sampling frequency of 192kHz
+	
+**Frequency response of the FIR filter for floating-point and 16-bit fixed point representation:**
+	![M_Fig_1](./docs/M_Fig_1.jpg)  
 
-Apart from 'vanilla' I2C protocol following features are supported:
-1.  Clock stretching
-2.	Clock synchronization and arbritration for multi-controller systems
 
-All timing parameters are defined as constants which can be overidden to comply with different target'/controllers' requirement. Please refer to section 6 of the I2C bus specification manual for the definition ofthese timing intervals. 
-The open drain configuration is mimicked here by using 'tri1' wire type for the SCL and SDA lines.
 ## Testbench
 
 The testbench comprises five tests covering key scenarios of multi-controller (3) multi-target (2) I2C systems.
