@@ -20,6 +20,7 @@ This repository containts a SystemVerilog implementation of a parametrized finit
 
 ##Matlab script
 The filter coefficients are obtained from the attached Matlab script which also converts the floating point representation of the built-in 'fir1' function into a user-defined fixed-point representation. In addition, the input signal to be filtered undergoes similar convertion to fixed-point representation.These are exported to two text files ('filter_coefficients' and 'input_signal') which are then imported to the TB.
+The script is completely parametrized and can be used to obtain different filters (LPF,BPF,HPF...) and fixed-point representation lengths.
 The coefficeints in this example are derived to satisfy:
 	1.Passband frequency of 10kHz
 	2.Stopband frequency of 15kHz
@@ -29,7 +30,15 @@ The coefficeints in this example are derived to satisfy:
 **Frequency response of the FIR filter for floating-point and 16-bit fixed point representation:**
 	![M_Fig_1](./docs/M_Fig_1.jpg)  
 
+**FIR filter coefficients:**
+	![M_Fig_2](./docs/M_Fig_2.jpg)  
 
+**Time domain signals (input signal and the filtered signal):**
+	![M_Fig_3](./docs/M_Fig_3.jpg) 
+	
+**Frequency domain signals (input signal, filter frequency response and the corresponding filtered signal):**
+	![M_Fig_4](./docs/M_Fig_4.jpg) 	
+	
 ## Testbench
 
 The testbench comprises five tests covering key scenarios of multi-controller (3) multi-target (2) I2C systems.
