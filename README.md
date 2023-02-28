@@ -18,7 +18,8 @@ The source files  are located at the repository root:
 ##
 This repository containts a SystemVerilog implementation of a parametrized finite impulse reponse (FIR) filter as well as a Matlab script for coefficient selection and input data pre-processing. Theoretical background can be found in [the following article](https://www.allaboutcircuits.com/technical-articles/finite-impulse-response-filter-design-by-windowing-part-i-concepts-and-rect/).
 
-##Matlab script
+##
+Matlab script
 The filter coefficients are obtained from the attached Matlab script which also converts the floating point representation of the built-in 'fir1' function into a user-defined fixed-point representation. In addition, the input signal to be filtered undergoes similar convertion to fixed-point representation.These are exported to two text files ('filter_coefficients' and 'input_signal') which are then imported to the TB.
 The script is completely parametrized and can be used to obtain different filters (LPF,BPF,HPF...) and fixed-point representation lengths.
 The coefficeints in this example are derived to satisfy:
@@ -47,8 +48,7 @@ In the attached picture, the time-domain signal and filter coefficeints are show
 
 **FIR filter operation:**
 	![Sim_1](./docs/Sim_1.jpg)  
-		
-		
+
 ## Support
 
 I will be happy to answer any questions.  
